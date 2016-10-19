@@ -6,7 +6,7 @@ end
 require 'chef/provisioning/aws_driver'
 
 with_driver 'aws'
-with_chef_server "https://api.chef.io/organizations/clogeny01",
+with_chef_server "<server url >",
  :client_name => Chef::Config[:node_name],
  :signing_key_filename => Chef::Config[:client_key]
 
@@ -15,10 +15,10 @@ with_machine_options({
         allow_overwrite_keys: true,
         :ssl_verify_mode => :verify_none
     },
-    bootstrap_options: {
+   bootstrap_options: {
    image_id: "ami-2d39803a", # default for us-east-1
-   key_name: "terra1", # If not specified, this will be used and generated
-   key_path: "/home/gauravh/Downloads/terra1.pem", # only necessary if storing keys some other location
+   key_name: "<key-name>", # If not specified, this will be used and generated
+   key_path: "<key-path>", # only necessary if storing keys some other location
  },
  ssh_username: 'ubuntu',
  
@@ -27,7 +27,7 @@ with_machine_options({
 })
 
 # commented for safty
-machine "provisioner-poc-test" do
+machine "provisioner" do
     recipe 'terra'
     action :converge
 end
